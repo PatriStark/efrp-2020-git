@@ -1,3 +1,2 @@
-Hi there.
-
-An unnecessary line.
+Hi there
+I hope this *message* finds you well
