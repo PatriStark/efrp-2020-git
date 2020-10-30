@@ -1,4 +1,4 @@
-arima_model_fitting_parameters <- function(IC = "AIC", max_p = 2, max_q = 2){
+arima_model_fitting_parameters <- function(IC = "aic", max_p = 2, max_q = 2){
   #  stores model fitting parameters
   
   #  IC ... information criterion (AIC, BIC, HQ)
@@ -11,3 +11,4 @@ arima_model_fitting_parameters <- function(IC = "AIC", max_p = 2, max_q = 2){
   # returns a tibble
   return(model_parameters)
 }
+

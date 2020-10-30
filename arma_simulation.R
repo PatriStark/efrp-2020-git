@@ -1,4 +1,4 @@
-arma_simulation <- function(parameters){
+arma_simulation <- function(parameters, phi = c(0.5), theta = c(0.85)){
   ## generate N samples of length M of an ARMA(p,q) process, with a normal WN(sigma^2)
   
   # "parameters" has attributes:
@@ -10,26 +10,26 @@ arma_simulation <- function(parameters){
   
   
   # read parameters in
-  M <- parameters$length
-  sigma <- parameters$sigma
-  p <- parameters$AR
-  q <- parameters$MA
+  M <- parameters$length[1]
+  sigma <- parameters$sigma[1]
+  p <- parameters$AR[1]
+  q <- parameters$MA[1]
   d <- 0
   
-  # generate coefficients randomly from  _normal_ distribution
+  # generate coefficients randomly from  _uniform_ distribution
   
-  theta <- rnorm(q) # theta ... MA coefficients
-  phi <- rnorm(p, 0, 0.33) # phi ... AR coefficients
+  #theta <- runif(q, -2.5,2.5) # theta ... MA coefficients
+  #phi <- runif(p, -0.6, 0.6) # phi ... AR coefficients
   
   # decide whether AR is stationary
-  roots <- c(1, -phi) %>% polyroot()
+  #roots <- c(1, -phi) %>% polyroot()
   
   # regenerate while the model is not stationary
-  while ( ! (roots %>% abs() %>% prod()) > 1){
+  #while ( ! (roots %>% abs() %>% prod()) > 1){
     
-    phi <- rnorm(p) # phi ... AR coefficients
-    roots <- c(1, -phi) %>% polyroot()
-  }
+    #phi <- runif(p,-0.5,-.5) # phi ... AR coefficients
+    #roots <- c(1, -phi) %>% polyroot()
+  #}
   
   # simulate time series
   
@@ -38,3 +38,4 @@ arma_simulation <- function(parameters){
   # returns a time series
   return(ts)
 }
+

@@ -13,3 +13,4 @@ arma_sim_param <- function(N, M, sigma, p, q){
   # returns a tibble
   return(parameters) 
 }
+

@@ -19,22 +19,23 @@ fitting_model <- function(ts, model_parameters, parameters){
   
   
   # maximum orders
-  max_p = model_parameters$`max p`
-  max_q = model_parameters$`max q`
+  max_p = model_parameters$`max p`[1]
+  
+  max_q = model_parameters$`max q`[1]
   
   # the IC
-  IC = model_parameters$IC
+  IC = model_parameters$IC[1]
   
   
   # fit model 
-  fitted_model <- ts %>% auto.arima(d = NA, max.p = max_p, max.q = max_q, ic = IC )
+  fitted_model <- ts %>% auto.arima(d = 0, D = 0, max.p = max_p, max.q = max_q, max.P = 0, max.Q = 0, ic = IC )
       
   # get estimated orders
-  p_chosen = fitted_model[1]
-  q_chosen = fitted_model[2]
+  p_chosen = fitted_model[['arma']][1]
+  q_chosen = fitted_model[['arma']][2]
   
   # check whether specification is correct
-  if (p_chosen == parameters$AR & q_chosen == parameters$MA){
+  if (p_chosen == 1 | q_chosen == 1){
     # if yes
     return(1)
   }else{
@@ -43,3 +44,4 @@ fitting_model <- function(ts, model_parameters, parameters){
   }
   
 }
+
